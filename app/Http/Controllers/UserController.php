@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -53,5 +54,29 @@ class UserController extends Controller
         $request->session()->flash('success', 'You have been successfully logout');
 
         return redirect(route('user.login'));
+    }
+
+    /**
+     * Get user list
+     */
+    public function list(): Application|Factory|View|RedirectResponse|Redirector
+    {
+        $users = User::query()
+            ->orderBy('id')
+            ->paginate(5);
+
+        return view('user.list', ['users' => $users]);
+    }
+
+    /**
+     * Delete user
+     */
+    public function delete(User $user): Application|RedirectResponse|Redirector
+    {
+        $name = $user->name;
+        $user->delete();
+
+        session()->flash('success', "User `{$name}` was successfully deleted");
+        return redirect(route('user.list'));
     }
 }

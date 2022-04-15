@@ -21,4 +21,8 @@ Route::post('/user/login', [UserController::class, 'authenticate'])->name('user.
 Route::middleware('auth:web')->group(function () {
     Route::get('/', [EvidenceController::class, 'index'])->name('evidence.index');
     Route::get('/user/logout', [UserController::class, 'logout'])->name('user.logout');
+    Route::middleware('admin')->group(function() {
+        Route::get('/user/list', [UserController::class, 'list'])->name('user.list');
+        Route::get('/user/delete/{user}', [UserController::class, 'delete'])->name('user.delete');
+    });
 });
