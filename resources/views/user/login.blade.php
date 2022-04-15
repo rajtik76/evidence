@@ -4,7 +4,7 @@
     Login
 @endsection
 
-@section('content')
+@section('signed-content')
     <div class="container-fluid vh-100">
         <div class="d-flex justify-content-center align-items-center h-100">
             <form class="shadow-lg p-3 bg-light rounded-3" method="post" action="{{ route('user.authenticate') }}">
