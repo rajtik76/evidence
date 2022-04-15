@@ -15,8 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [UserController::class, 'login']);
+Route::get('/login', [UserController::class, 'loginForm'])->name('login');
+Route::post('/login', [UserController::class, 'authenticate'])->name('user.authenticate');
 
-Route::middleware('web')->group(function () {
-    Route::get('/index', [EvidenceController::class, 'index']);
+Route::middleware('auth:web')->group(function () {
+    Route::get('/', [EvidenceController::class, 'index'])->name('evidence.index');
 });
