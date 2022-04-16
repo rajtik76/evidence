@@ -19,6 +19,7 @@ Route::get('/user/login', [UserController::class, 'loginForm'])->name('user.logi
 Route::post('/user/login', [UserController::class, 'authenticate'])->name('user.authenticate');
 
 Route::middleware('auth:web')->group(function () {
+    Route::get('/language/{language}', [\App\Http\Controllers\LanguageController::class, 'switch'])->name('language.switch');
     Route::get('/', [EvidenceController::class, 'index'])->name('evidence.index');
     Route::get('/user/logout', [UserController::class, 'logout'])->name('user.logout');
     Route::middleware('admin')->group(function() {

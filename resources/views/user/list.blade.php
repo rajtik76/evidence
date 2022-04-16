@@ -1,7 +1,7 @@
 @extends('layout-signed')
 
 @php
-    $title = 'User list'
+    $title = trans('user.list.title')
 @endphp
 
 @section('title', $title)
@@ -14,7 +14,7 @@
                     <h5 class="card-title">{{ $title }}</h5>
                 </div>
                 <div class="col text-end">
-                    <a class="btn btn-success" href="{{ route('user.new') }}">New user</a>
+                    <a class="btn btn-success" href="{{ route('user.new') }}">{{ __('user.list.table.actions.new') }}</a>
                 </div>
             </div>
             <hr>
@@ -22,10 +22,10 @@
                 <div class="row">
                     <table class="table table-striped">
                         <thead class="table-dark">
-                        <th scope="row">Id</th>
-                        <th scope="row">Name</th>
-                        <th scope="row">Email</th>
-                        <th scope="row" class="w-25">Actions</th>
+                        <th scope="row">{{ __('user.base.table.id') }}</th>
+                        <th scope="row">{{ __('user.base.table.name') }}</th>
+                        <th scope="row">{{ __('user.base.table.email') }}</th>
+                        <th scope="row" class="w-25">{{ __('user.list.table.actions.title') }}</th>
                         </thead>
                         <tbody>
                         @foreach($users as $user)
@@ -34,9 +34,9 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>
-                                    <a class="btn btn-primary" href="{{ route('user.edit', ['user' => $user->id]) }}">Edit</a>
+                                    <a class="btn btn-primary" href="{{ route('user.edit', ['user' => $user->id]) }}">{{ __('user.list.table.actions.edit') }}</a>
                                     @if(auth()->user()->id != $user->id)
-                                        <a class="btn btn-danger" href="{{ route('user.delete', ['user' => $user->id]) }}" onclick="return confirm('Are you sure ?');">Delete</a>
+                                        <a class="btn btn-danger" href="{{ route('user.delete', ['user' => $user->id]) }}" onclick="return confirm('{{ __('user.base.confirm.areYouSure') }}');">{{ __('user.list.table.actions.delete') }}</a>
                                     @endif
                                 </td>
                             </tr>

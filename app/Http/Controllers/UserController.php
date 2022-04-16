@@ -89,7 +89,7 @@ class UserController extends Controller
     public function edit(User $user): View
     {
         $action = route('user.update', ['user' => $user->id]);
-        $title = "Edit user";
+        $title = trans('user.edit.title');
 
         return view('user.edit', compact(['user', 'title', 'action']));
     }
@@ -120,7 +120,7 @@ class UserController extends Controller
     public function new(): View
     {
         $user = new User();
-        $title = "New user";
+        $title = trans('user.new.title');
         $action = route('user.store');
 
         return view('user.new', compact(['user', 'title', 'action']));
