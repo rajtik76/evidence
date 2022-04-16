@@ -24,5 +24,9 @@ Route::middleware('auth:web')->group(function () {
     Route::middleware('admin')->group(function() {
         Route::get('/user/list', [UserController::class, 'list'])->name('user.list');
         Route::get('/user/delete/{user}', [UserController::class, 'delete'])->name('user.delete');
+        Route::get('/user/edit/{user}', [UserController::class, 'edit'])->name('user.edit');
+        Route::post('/user/edit/{user}', [UserController::class, 'update'])->name('user.update');
+        Route::get('/user/new', [UserController::class, 'new'])->name('user.new');
+        Route::post('/user/new', [UserController::class, 'store'])->name('user.store');
     });
 });

@@ -40,7 +40,7 @@
                 </ul>
             </div>
             <div class="dropdown">
-                <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                    data-bs-toggle="dropdown" aria-expanded="false">
                     {{ auth()->user()->name }}
                 </a>
@@ -52,7 +52,7 @@
         </div>
     </nav>
     <div class="container-fluid">
-        <div class="row">
+        <div class="row mt-3">
             @yield('content')
         </div>
     </div>

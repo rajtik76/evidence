@@ -21,15 +21,7 @@
                 <div class="mb-3 text-center">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                <x-form-error :errors="$errors"/>
             </form>
         </div>
     </div>
