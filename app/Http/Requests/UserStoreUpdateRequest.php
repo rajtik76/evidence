@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Validation\Rule;
 
-class StoreUserRequest extends UpdateUserRequest
+class UserStoreUpdateRequest extends UserUpdateRequest
 {
     public function rules()
     {

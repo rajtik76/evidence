@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\UserStoreUpdateRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Models\User;
 use App\Services\Grid\Action;
 use App\Services\Grid\Column;
@@ -102,7 +102,7 @@ class UserController extends Controller
     /**
      * Update user data
      */
-    public function update(UpdateUserRequest $request, User $user): RedirectResponse
+    public function update(UserUpdateRequest $request, User $user): RedirectResponse
     {
         $validated = $request->validated();
 
@@ -134,7 +134,7 @@ class UserController extends Controller
     /**
      * Store user data
      */
-    public function store(StoreUserRequest $request): RedirectResponse
+    public function store(UserStoreUpdateRequest $request): RedirectResponse
     {
         $user = new User($request->validated());
         $user->password = Hash::make($user->password);

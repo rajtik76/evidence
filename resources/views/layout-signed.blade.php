@@ -20,6 +20,9 @@
                             <a @class(["nav-link", "active" => request()->route()->named('user.list')]) @if(request()->route()->named('user.list'))aria-current="page" @endif href="{{ route('user.list') }}">{{ __('navbar.users') }}</a>
                         </li>
                     @endif
+                    <li class="nav-item">
+                        <a @class(["nav-link", "active" => request()->route()->named('department.index')]) @if(request()->route()->named('department.index'))aria-current="page" @endif href="{{ route('department.index') }}">{{ __('navbar.departments') }}</a>
+                    </li>
                 </ul>
             </div>
             <div class="dropdown">

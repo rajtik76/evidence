@@ -2,5 +2,6 @@
 
 return [
     'users' => 'Users',
+    'departments' => 'Departments',
     'logout' => 'Logout',
 ];

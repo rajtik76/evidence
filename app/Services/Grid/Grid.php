@@ -16,7 +16,7 @@ class Grid
     /**
      * Get grid data source
      */
-    public function getDataSource(): LengthAwarePaginator
+    public function getDatasource(): LengthAwarePaginator
     {
         return $this->dataSource;
     }

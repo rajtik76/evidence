@@ -8,7 +8,7 @@
     <th scope="row" class="w-25">{{ __('user.list.table.actions.title') }}</th>
     </thead>
     <tbody>
-    @foreach($grid->getDataSource() as $data)
+    @foreach($grid->getDatasource() as $data)
         <tr>
             @foreach($grid->getColumns() as $column)
                 @if($loop->first)

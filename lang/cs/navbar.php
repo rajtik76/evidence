@@ -2,5 +2,6 @@
 
 return [
     'users' => 'Uživatelé',
+    'departments' => 'Oddělení',
     'logout' => 'Odhlášení',
 ];
