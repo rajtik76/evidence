@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use App\Services\Grid\Action;
+use App\Services\Grid\Column;
+use App\Services\Grid\Grid;
 use Hash;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -67,8 +71,9 @@ class UserController extends Controller
         $users = User::query()
             ->orderBy('id')
             ->paginate(5);
+        $grid = $this->getUserListGrid($users);
 
-        return view('user.list', compact(['users']));
+        return view('user.list', compact(['users', 'grid']));
     }
 
     /**
@@ -138,5 +143,29 @@ class UserController extends Controller
 
         session()->flash('success', "User `{$user->name}` was successfully created.");
         return to_route('user.list');
+    }
+
+    /**
+     * Get user list grid
+     */
+    public function getUserListGrid(LengthAwarePaginator $users): Grid
+    {
+        $columns = [
+            new Column('id', trans('user.base.table.id')),
+            new Column('name', trans('user.base.table.name')),
+            new Column('email', trans('user.base.table.email')),
+        ];
+        $actions = [
+            (new Action('id', trans('user.list.table.actions.edit'), ['class' => 'btn btn-primary']))->setHref(fn(int $id) => route('user.edit', ['user' => $id])),
+            (new Action('id', trans('user.list.table.actions.delete'), ['class' => 'btn btn-danger', 'onClick' => "return confirm('" . trans('user.base.confirm.areYouSure') . "');"]))
+                ->setHref(fn(int $id) => route('user.delete', ['user' => $id]))
+                ->setDisplayCondition(fn(int $id) => auth()->user()->id != $id), // current user cannot delete himself
+        ];
+
+        return new Grid(
+            dataSource: $users,
+            columns: $columns,
+            actions: $actions
+        );
     }
 }
