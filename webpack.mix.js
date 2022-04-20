@@ -14,4 +14,5 @@ const {sass} = require("laravel-mix");
 
 mix.copyDirectory('resources/flags', 'public/images/flags');
 mix.sass('resources/css/app.scss', 'public/css')
-    .js('resources/js/app.js', 'public/js');
+    .js('resources/js/app.js', 'public/js')
+    .vue();
