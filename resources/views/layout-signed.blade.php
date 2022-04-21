@@ -2,7 +2,7 @@
 
 @section('signed-content')
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
+        <div class="container-fluid" id="app">
             <a class="navbar-brand" href="{{ route('evidence.index') }}">
                 <img src="https://laravel.com/img/logomark.min.svg" alt="" width="30" height="24"
                      class="d-inline-block align-text-top">
@@ -61,4 +61,8 @@
             @yield('content')
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script src="{{ mix('js/app.js') }}"></script>
 @endsection
