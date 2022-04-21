@@ -1,7 +1,7 @@
 @extends('layout-signed')
 
 @php
-    $title = trans('department.index.title')
+    $title = trans('employee.index.title')
 @endphp
 
 @section('title', $title)
@@ -14,7 +14,7 @@
                     <h5 class="card-title">{{ $title }}</h5>
                 </div>
                 <div class="col text-end">
-                    <a class="btn btn-success" href="{{ route('department.create') }}">{{ __('department.index.table.actions.new') }}</a>
+                    <a class="btn btn-success" href="{{ route('employee.create') }}">{{ __('employee.index.table.actions.new') }}</a>
                 </div>
             </div>
             <hr>

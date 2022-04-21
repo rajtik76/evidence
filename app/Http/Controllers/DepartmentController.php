@@ -7,6 +7,7 @@ use App\Http\Requests\DepartmentUpdateRequest;
 use App\Models\Department;
 use App\Services\Grid\Action;
 use App\Services\Grid\Column;
+use App\Services\Grid\Enum\Method;
 use App\Services\Grid\Grid;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -33,8 +34,9 @@ class DepartmentController extends Controller
     {
         $title = trans('department.edit.title');
         $action = route('department.update', ['department' => $department->id]);
+        $method = Method::PATCH;
 
-        return view('department.edit', compact(['title', 'action', 'department']));
+        return view('department.edit', compact(['title', 'action', 'department', 'method']));
     }
 
     /**
@@ -53,7 +55,7 @@ class DepartmentController extends Controller
     /**
      * Delete department
      */
-    public function delete(Department $department): RedirectResponse
+    public function destroy(Department $department): RedirectResponse
     {
         try {
             $department->deleteOrFail();
@@ -68,13 +70,14 @@ class DepartmentController extends Controller
     /**
      * New department
      */
-    public function new(): View
+    public function create(): View
     {
         $department = new Department();
         $title = trans('department.new.title');
         $action = route('department.store');
+        $method = Method::POST;
 
-        return view('department.edit', compact(['title', 'action', 'department']));
+        return view('department.edit', compact(['title', 'action', 'department', 'method']));
     }
 
     /**
@@ -101,7 +104,9 @@ class DepartmentController extends Controller
         ];
         $actions = [
             (new Action('id', trans('department.index.table.actions.edit'), ['class' => 'btn btn-primary']))->setHref(fn(int $id) => route('department.edit', ['department' => $id])),
-            (new Action('id', trans('department.index.table.actions.delete'), ['class' => 'btn btn-danger', 'onClick' => "return confirm('" . trans('user.base.confirm.areYouSure') . "');"]))->setHref(fn(int $id) => route('department.delete', ['department' => $id]))
+            (new Action('id', trans('department.index.table.actions.delete'), ['class' => 'btn btn-danger', 'onClick' => "return confirm('" . trans('user.base.confirm.areYouSure') . "');"]))
+                ->setHref(fn(int $id) => route('department.destroy', ['department' => $id]))
+                ->setMethod(Method::DELETE)
         ];
 
         return new Grid(

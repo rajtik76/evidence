@@ -3,5 +3,6 @@
 return [
     'users' => 'Users',
     'departments' => 'Departments',
+    'employees' => 'Employees',
     'logout' => 'Logout',
 ];

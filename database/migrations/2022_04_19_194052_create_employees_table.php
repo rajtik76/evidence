@@ -15,7 +15,7 @@ return new class extends Migration {
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Department::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Department::class)->nullable(true)->constrained()->nullOnDelete();
             $table->string('first_name')->nullable(false);
             $table->string('last_name')->nullable(false);
             $table->unsignedInteger('salary')->nullable(false)->default(0);

@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EvidenceController;
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,18 +22,12 @@ Route::get('/user/login', [UserController::class, 'loginForm'])->name('user.logi
 Route::post('/user/login', [UserController::class, 'authenticate'])->name('user.authenticate');
 
 Route::middleware('auth:web')->group(function () {
-    Route::get('/language/{language}', [\App\Http\Controllers\LanguageController::class, 'switch'])->name('language.switch');
+    Route::get('/language/{language}', [LanguageController::class, 'switch'])->name('language.switch');
     Route::get('/', [EvidenceController::class, 'index'])->name('evidence.index');
     Route::get('/user/logout', [UserController::class, 'logout'])->name('user.logout');
 
-    Route::controller(\App\Http\Controllers\DepartmentController::class)->group(function () {
-        Route::get('/department/index', 'index')->name('department.index');
-        Route::get('/department/edit/{department}', 'edit')->name('department.edit');
-        Route::get('/department/delete/{department}', 'delete')->name('department.delete');
-        Route::post('/department/update/{department}', 'update')->name('department.update');
-        Route::get('/department/new', 'new')->name('department.new');
-        Route::post('/department/store', 'store')->name('department.store');
-    });
+    Route::resource('department', DepartmentController::class);
+    Route::resource('employee', EmployeeController::class);
 
     Route::middleware('admin')->group(function () {
         Route::get('/user/list', [UserController::class, 'list'])->name('user.list');

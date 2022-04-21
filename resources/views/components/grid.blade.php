@@ -20,9 +20,13 @@
 
             @if($grid->getActions())
                 <td>
+                    <span class="d-flex">
                     @foreach($grid->getActions() as $action)
+                        <span class="px-1">
                         {!! $action->getActionHtml($data->{$action->getIdName()}) !!}
+                            </span>
                     @endforeach
+                    </span>
                 </td>
             @endif
         </tr>

@@ -10,6 +10,9 @@
                 <hr>
                 <form method="post" action="{!! $action !!}">
                     @csrf()
+                    @if($method !== \App\Services\Grid\Enum\Method::POST)
+                        @method($method->name)
+                    @endif
                     <div class="mb-3">
                         <input type="text" name="name" value="{{ old('name', $department) }}" class="form-control" placeholder="{{ __('department.edit.name') }}" aria-describedby="nameHelpBlock">
                         <div id="nameHelpBlock" class="form-text">
